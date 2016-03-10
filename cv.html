@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+    <link href="index.css" rel="stylesheet" type="text/css" />
+    <script src="anagram.js"></script>
+    <title></title>
+  </head>
+
+  <body>
+    <div id="content">
+      <h1> Ben Scheiner </h1>
+      <p> I am a developer with professional experience in data modeling and visualization. I spent the beginning of
+        2016 at the <a id="1" href="#">Recurse Center</a>, and worked at the <a id="2" href="#">Federal Reserve Board</a>
+        from 2013 to 2015. I have experience with
+        <a id="3" href="#">Python</a>,
+        <a id="4" href="#">D3</a>,
+        <a id="5" href="#">Javascript</a>,
+        <a id="6" href="#">C</a>,
+        <a id="7" href="#">Matlab</a>,
+        <a id="8" href="#">Bash</a>,
+        and <a id="9" href="#">Processing</a>, but I love learning new languages too!
+      </p>
+      <img class="divider" src="img/line-divider.png">
+      <div id="anagram-space"></div>
+      <img class="divider" src="img/line-divider.png">
+      <div id="social">
+        <a href="https://github.com/brmscheiner"><img src="img/github-icon.png"></a>
+      </div>
+    </div>
+    <script>
+      "use strict"
+
+      let content_python = "Ideogram, Twitterbot, etc."
+
+      let anagram = new Anagram()
+
+      anagram.initialize({
+       container: document.getElementById("anagram-space"),
+       states: {
+         "bio": content_python,
+         "about": "I wrote all of Shakespeare's plays, and the wife and I got together, did most of his sonnets for our entertainment. But tormentors oft attribute that our brash quotes as being bogus. O! no! no! no!",
+         "info": "Is a befitting quote from one of Shakespeare's greatest tragedies. But why won't Hamlet's inspiring motto toss our stubborn hero's tortuous battle for life, on one hand, and death, on another?"
+       },
+       mode: "normal",
+       duration: 0.5 // in seconds
+      })
+
+      //
+      // window.onload = function() {
+      //   var rc = document.getElementById("1");
+      //   rc.onClick = function() {anagram.animateTo("info")}
+      // }
+      document.getElementById("1").addEventListener("click", () => anagram.animateTo("info"))
+      document.getElementById("2").addEventListener("click", () => anagram.animateTo("about"))
+      document.getElementById("3").addEventListener("click", () => anagram.animateTo("bio"))
+
+    </script>
+  </body>
+</html>

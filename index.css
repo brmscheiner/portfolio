@@ -1,0 +1,49 @@
+body {
+  overflow-x: hidden;
+  padding-top: 40px;
+  font-family: 'Playfair Display'
+}
+
+.container {}
+
+.char, .word {
+  display: inline-block;
+}
+
+.anagram-container {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.invisible {
+  position: absolute;
+  opacity: 0;
+}
+
+a {
+  color: #665155;
+}
+
+img.divider {
+  width: 100%;
+}
+
+#content {
+  width: 40%;
+  margin: 0 auto;
+  line-height: 1.5em;
+  text-align: center;
+}
+
+#anagram-space {
+  height: 200px;
+}
+
+.social {
+  position: relative;
+  z-index: 100;
+}
+
+h1 {
+  font-family: 'Raleway', sans-serif;
+}
