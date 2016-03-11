@@ -16,6 +16,7 @@ class Anagram {
     let stateKeys = Object.keys(this.config.states)
 
     stateKeys.forEach((stateKey, i) => {
+      console.log(stateKey)
       let newContainer = this.config.container.cloneNode()
           newContainer.id = stateKey
           newContainer.className = "anagram-container invisible"
@@ -38,7 +39,6 @@ class Anagram {
     container.left = this.config.container.offsetLeft
     container.top = this.config.container.offsetTop
     let charSpans = this.separateChars(text, container)
-    console.log(charSpans)
     this.charData[stateKey] = charSpans.map((charSpan) => this.getCharData(charSpan))
   }
 

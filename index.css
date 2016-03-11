@@ -4,15 +4,48 @@ body {
   font-family: 'Playfair Display'
 }
 
-.container {}
 
-.char, .word {
-  display: inline-block;
+#content {
+  width: 42%;
+  margin: 0 auto;
+  line-height: 1.5em;
+  text-align: left;
 }
 
-.anagram-container {
-  width: 300px;
+h1 {
+  font-family: 'Roboto Slab', sans-serif;
+}
+
+#intro {
+  text-align: justify;
+}
+
+#anagram-big {
+  font-weight: 700;
+}
+
+#anagram-small {
+  font-size: 100%;
+  /*-moz-transition: height 1s ease-in;
+  -webkit-transition: height 1s ease-in;
+  -moz-transition:height 1s ease-in;
+  -o-transition:height 1s ease-in;
+  transition:height 1s ease-in;*/
+}
+
+#social img {
+  position: relative;
+  z-index: 1;
+  display: block;
   margin: 0 auto;
+}
+
+img.divider {
+  width: 100%;
+}
+
+a {
+  color: #665155;
 }
 
 .invisible {
@@ -20,26 +53,6 @@ body {
   opacity: 0;
 }
 
-a {
-  color: #665155;
-}
-
-img.divider {
-  width: 100%;
-}
-
-#content {
-  width: 40%;
-  margin: 0 auto;
-  line-height: 1.5em;
-  text-align: center;
-}
-
-.social {
-  position: relative;
-  z-index: 100;
-}
-
-h1 {
-  font-family: 'Roboto Slab', sans-serif;
+.char, .word {
+  display: inline-block;
 }
