@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:100' rel='stylesheet' type='text/css'>
+    <link href="index.css" rel="stylesheet" type="text/css" />
+    <script src="anagram.js"></script>
+    <title></title>
+  </head>
+
+  <body>
+    <div id="content">
+      <h1> Ben Scheiner </h1>
+      <p> I am a developer with professional experience in data modeling and visualization. I spent the beginning of
+        2016 at the <a id="RC" href="#">Recurse Center</a>, and worked at the <a id="FRB" href="#">Federal Reserve Board</a>
+        from 2013 to 2015. I have experience with
+        <a id="PY" href="#">Python</a>,
+        <a id="JS" href="#">Javascript</a>,
+        <a id="C" href="#">C</a>,
+        <a id="D3" href="#">D3</a>,
+        <a id="MTLB" href="#">Matlab</a>,
+        <a id="BASH" href="#">Bash</a>,
+        and <a id="PRO" href="#">Processing</a>, but I love learning new languages too!
+      </p>
+      <img class="divider" src="img/line-divider.png">
+      <div id="anagram-space"></div>
+      <img class="divider" src="img/line-divider.png">
+      <div id="social">
+        <a href="https://github.com/brmscheiner"><img src="img/github-icon.png"></a>
+      </div>
+    </div>
+    <script>
+      "use strict"
+
+      // need to add education // bullet for later use: •
+      let content_py = "Ideogram\n Twitterbot\n zlp."
+      let content_d3 = "Ideogram"
+      let content_js = "Ideogram\n portfolio"
+      let content_c = "LZW compression"
+      let content_mtlb = "UMPAs, forecasting"
+      let content_frb = "UMPAs, forecasting, feded"
+      let content_bash = "zlp"
+      let content_rc = "Ideogram\n twitterbot \n zlp"
+      let content_pro = "Hormigas"
+
+      let anagram = new Anagram()
+      anagram.initialize({
+       container: document.getElementById("anagram-space"),
+       states: {
+         "state_PY": content_py,
+         "state_MTLB": content_mtlb,
+         "state_C": content_c,
+         "state_D3": content_d3,
+         "state_RC": content_rc,
+         "state_BASH": content_bash,
+         "state_FRB": content_frb,
+         "state_PRO": content_pro,
+         "state_JS": content_js
+       },
+       mode: "normal",
+       duration: 0.5 // in seconds
+      })
+
+      document.getElementById("PY").addEventListener("click", () => anagram.animateTo("state_PY"))
+      document.getElementById("MTLB").addEventListener("click", () => anagram.animateTo("state_MTLB"))
+      document.getElementById("C").addEventListener("click", () => anagram.animateTo("state_C"))
+      document.getElementById("D3").addEventListener("click", () => anagram.animateTo("state_D3"))
+      document.getElementById("RC").addEventListener("click", () => anagram.animateTo("state_RC"))
+      document.getElementById("FRB").addEventListener("click", () => anagram.animateTo("state_FRB"))
+      document.getElementById("BASH").addEventListener("click", () => anagram.animateTo("state_BASH"))
+      document.getElementById("JS").addEventListener("click", () => anagram.animateTo("state_JS"))
+      document.getElementById("PRO").addEventListener("click", () => anagram.animateTo("state_PRO"))
+
+    </script>
+  </body>
+</html>

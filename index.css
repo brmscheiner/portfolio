@@ -35,15 +35,11 @@ img.divider {
   text-align: center;
 }
 
-#anagram-space {
-  height: 200px;
-}
-
 .social {
   position: relative;
   z-index: 100;
 }
 
 h1 {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto Slab', sans-serif;
 }
