@@ -1,3 +1,6 @@
+<!-- Add a div that includes links to projects that I refer to in the above text. Contact information modal.
+ Ease in div resizing... -->
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -6,7 +9,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:100' rel='stylesheet' type='text/css'>
     <link href="index.css" rel="stylesheet" type="text/css" />
     <script src="anagram.js"></script>
-    <title></title>
+    <title>Ben Scheiner</title>
   </head>
 
   <body>
@@ -34,16 +37,19 @@
       <div id="anagram-small"></div>
       <img class="divider" src="img/line-divider.png">
       <div id="social">
-        <a href="https://github.com/brmscheiner"><img src="img/github-icon.png"></a>
+        <a href="https://github.com/brmscheiner"><img src="img/github-icon.png" height=50px></a>
+        <a href="https://github.com/brmscheiner"><img src="img/email-icon.png" height=32px></a>
       </div>
     </div>
     <script>
       "use strict"
 
-      // need to add a div that includes links to projects
-      // that I refer to in the above text.
-      // contact information somewhere.
-      // ease in div resizing...
+      let header_data = ""
+      let content_data =
+      ""
+      let header_viz = ""
+      let content_viz =
+      ""
       let header_py = ""
       let content_py =
       "Python is definitely my strongest language. Most of the coursework for "+
@@ -51,7 +57,7 @@
       "Federal Reserve to write data processing scripts, and it was the "+
       "language I used for my most ambitious projects at the Recurse Center. "+
       "I am comfortable with many of the more advanced features of the "+
-      "language, like generators, list comprehensions, and metaclasses."
+      "language, such as generators and metaclasses."
       let header_d3 = ""
       let content_d3 =
       "By far my biggest D3 project is Ideogram, which uses information about "+
@@ -63,33 +69,29 @@
       "visualizations in libraries like D3 and P5."
       let header_c = ""
       let content_c =
-      "At the Recurse Center I read Kernighan and Ritchie's book about C and "+
-      "implemented Lempel-Ziv-Welch compression. As a long time Linux user, I "+
-      "found it fascinating to learn how bash functions like cp and ls are "+
-      "implemented."
+      "At the Recurse Center I implemented Lempel-Ziv-Welch compression and "+
+      "read Kernighan and Ritchie's classic book about C. In addition to becoming "+
+      "familiar with how memory allocation works, I found it fascinating to learn "+
+      "how bash functions like cp and ls are implemented in practice."
       let header_mtlb = ""
       let content_mtlb = "At the Federal Reserve, I implemented a model of "+
       "monetary policy contagion in Matlab. In addition, many of the ad hoc "+
-      "visualizations I worked on were generated in Matlab, including some "+
-      "3D charts."
+      "charts I worked on were generated in Matlab, including some "+
+      "3D visualizations."
       let header_frb =
       "Senior Research Assistant, Federal Reserve Board of Governors\n"+
       "Global Financial Markets, July 2013 – June 2015"
       let content_frb =
-      "Research Assistants were responsible for updating software that pulls "+
-      "data from dozens of sources into a common database, automatically "+
-      "calculates related measures (such as rolling correlations and yield "+
-      "curves), and visualizes the data in a polished, consistent manner on "+
-      "the section website.\n"+
-      " • Implemented a model of monetary policy contagion in Matlab.\n"+
-      " • Created a database of liquidity measures using trade data from the corporate bond market in SAS.\n"+
-      " • Forecasted policy rate paths based on long-term exchange rates in Python.\n"+
-      " • Prepared charts for the Teal Book and briefings to the Board of Governors, usually under considerable time pressure.\n"+
-      " • Director of FedEd, the Board's education and outreach program for research assistants."
+      " • Created polished, elegant charts for the Teal Book and briefings to the Board of Governors on tight timelines.\n"+
+      " • Wrote scripts that organize financial data from dozens of sources into a common database.\n"+
+      " • Implemented statistical models for analyis and research projects.\n"+
+      " • Forecasted policy rate paths based on long-term exchange rates.\n"+
+      " • Served as Director of FedEd, the Board's education and outreach program for research assistants."
       let header_bash = ""
       let content_bash =
       "At the Recurse Center I built zlp, a command line interface for Zulip. "+
-      "Most of the time, I just use bash to get other work done."
+      "As a long time Linux user, I am relatively comfortable writing shell "+
+      "scripts and getting work done in the terminal."
       let header_rc =
       "Recurse Center\n"+
       "January - March 2016"
@@ -100,16 +102,16 @@
       " • Created a conspiracy theory generating twitterbot in Python.\n"+
       " • Wrote a Sudoku generator in Haskell.\n"+
       " • Developed a letter switching transition effect in Javascript.\n"+
-      " • Ideogram: generate visual fingerprints of your project's source code.\n"+
-      "    - Creates call graphs by statically parsing Python source code into abstract syntax "+
-      "trees and matching function calls to the function definitions they reference.\n"+
-      "    - Generates force directed graphs, enclosure diagrams, and custom gear "+
+      " • Ideogram: generate visual fingerprints of a project's source code.\n"+
+      "    ◦ Creates call graphs by statically parsing Python source code into abstract syntax "+
+      "trees and matching function calls to function definitions.\n"+
+      "    ◦ Generates force directed graphs, enclosure diagrams, and custom gear "+
       "layouts using D3 templates and pystache."
       let header_pro = ""
       let content_pro =
-      "Processing is my go-to environment for bringing whimsical ideas to life "+
-      "fast. For example, after spending 2 months at an ant-themed coworking "+
-      "space in Barcelona called ATTA, I wrote a script that makes virtual ants "+
+      "Processing is my go-to environment for bringing whimsical ideas to life. "+
+      "For example, after spending 2 months at ATTA, an ant-themed coworking "+
+      "space in Barcelona, I wrote a script that makes virtual ants "+
       "crawl into the shape of the ATTA logo."
       let header_tri =
       "Trinity University\n"+
@@ -132,22 +134,13 @@
          "small_state_FRB": content_frb,
          "small_state_PRO": content_pro,
          "small_state_JS": content_js,
-         "small_state_TRI": content_tri
+         "small_state_TRI": content_tri,
+         "small_state_VIZ": content_viz,
+         "small_state_DATA": content_data
        },
        mode: "normal",
        duration: 0.5 // in seconds
       })
-
-      document.getElementById("PY").addEventListener("click", () => small_anagram.animateTo("small_state_PY"))
-      document.getElementById("MTLB").addEventListener("click", () => small_anagram.animateTo("small_state_MTLB"))
-      document.getElementById("C").addEventListener("click", () => small_anagram.animateTo("small_state_C"))
-      document.getElementById("D3").addEventListener("click", () => small_anagram.animateTo("small_state_D3"))
-      document.getElementById("RC").addEventListener("click", () => small_anagram.animateTo("small_state_RC"))
-      document.getElementById("FRB").addEventListener("click", () => small_anagram.animateTo("small_state_FRB"))
-      document.getElementById("BASH").addEventListener("click", () => small_anagram.animateTo("small_state_BASH"))
-      document.getElementById("JS").addEventListener("click", () => small_anagram.animateTo("small_state_JS"))
-      document.getElementById("PRO").addEventListener("click", () => small_anagram.animateTo("small_state_PRO"))
-      document.getElementById("TRI").addEventListener("click", () => small_anagram.animateTo("small_state_TRI"))
 
       let big_anagram = new Anagram()
       big_anagram.initialize({
@@ -163,11 +156,26 @@
          "big_state_FRB": header_frb,
          "big_state_PRO": header_pro,
          "big_state_JS": header_js,
-         "big_state_TRI": header_tri
+         "big_state_TRI": header_tri,
+         "big_state_VIZ": header_viz,
+         "big_state_DATA": header_data
        },
        mode: "normal",
        duration: 0.5 // in seconds
       })
+
+      document.getElementById("PY").addEventListener("click", () => small_anagram.animateTo("small_state_PY"))
+      document.getElementById("MTLB").addEventListener("click", () => small_anagram.animateTo("small_state_MTLB"))
+      document.getElementById("C").addEventListener("click", () => small_anagram.animateTo("small_state_C"))
+      document.getElementById("D3").addEventListener("click", () => small_anagram.animateTo("small_state_D3"))
+      document.getElementById("RC").addEventListener("click", () => small_anagram.animateTo("small_state_RC"))
+      document.getElementById("FRB").addEventListener("click", () => small_anagram.animateTo("small_state_FRB"))
+      document.getElementById("BASH").addEventListener("click", () => small_anagram.animateTo("small_state_BASH"))
+      document.getElementById("JS").addEventListener("click", () => small_anagram.animateTo("small_state_JS"))
+      document.getElementById("PRO").addEventListener("click", () => small_anagram.animateTo("small_state_PRO"))
+      document.getElementById("TRI").addEventListener("click", () => small_anagram.animateTo("small_state_TRI"))
+      document.getElementById("VIZ").addEventListener("click", () => small_anagram.animateTo("small_state_VIZ"))
+      document.getElementById("DATA").addEventListener("click", () => small_anagram.animateTo("small_state_DATA"))
 
       document.getElementById("PY").addEventListener("click", () => big_anagram.animateTo("big_state_PY"))
       document.getElementById("MTLB").addEventListener("click", () => big_anagram.animateTo("big_state_MTLB"))
@@ -179,6 +187,8 @@
       document.getElementById("JS").addEventListener("click", () => big_anagram.animateTo("big_state_JS"))
       document.getElementById("PRO").addEventListener("click", () => big_anagram.animateTo("big_state_PRO"))
       document.getElementById("TRI").addEventListener("click", () => big_anagram.animateTo("big_state_TRI"))
+      document.getElementById("VIZ").addEventListener("click", () => big_anagram.animateTo("big_state_VIZ"))
+      document.getElementById("DATA").addEventListener("click", () => big_anagram.animateTo("big_state_DATA"))
 
     </script>
   </body>
