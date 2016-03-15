@@ -38,6 +38,7 @@ h1 {
   z-index: 1;
   display: block;
   margin: 0 auto;
+  float: left;
 }
 
 img.divider {
