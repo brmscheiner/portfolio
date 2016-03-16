@@ -17,6 +17,8 @@ Ease in div resizing.
   </head>
 
   <body>
+    <div id="modal-background" class="hidden"> </div>
+    <div id="modal" class="hidden">email: horse@beyonce.horse </div>
     <div id="content">
       <div id="intro">
         <h1> Ben Scheiner </h1>
@@ -43,7 +45,7 @@ Ease in div resizing.
       <img class="divider" src="img/line-divider.png">
       <div id="social">
         <a href="https://github.com/brmscheiner"><img src="img/github-icon.png" height=50px></a>
-        <a href="https://github.com/brmscheiner"><img src="img/email-icon.png" height=32px></a>
+        <a id="contact-info" href="#"><img src="img/email-icon.png" height=32px></a>
       </div>
     </div>
     <script>
@@ -211,6 +213,12 @@ Ease in div resizing.
       document.getElementById("TRI").addEventListener("click", () => big_anagram.animateTo("big_state_TRI"))
       document.getElementById("VIZ").addEventListener("click", () => big_anagram.animateTo("big_state_VIZ"))
       document.getElementById("DATA").addEventListener("click", () => big_anagram.animateTo("big_state_DATA"))
+
+      document.getElementById("contact-info").addEventListener("click", function () {
+        document.getElementById("modal").className=""
+        document.getElementById("modal-background").className=""
+        document.body.className="no-scroll"
+      })
 
     </script>
   </body>
