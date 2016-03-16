@@ -1,8 +1,8 @@
 <!-- wishlist
 Add a div that includes links to projects that I refer to in the above text.
-Contact information modal.
-Contact and gh link on the same level
-Ease in div resizing.
+Ease in div resizing and modal.
+Fix animation.
+Fix bug that forces first state to have text.
  -->
 
 <html>
@@ -18,7 +18,18 @@ Ease in div resizing.
 
   <body>
     <div id="modal-background" class="hidden"> </div>
-    <div id="modal" class="hidden">email: horse@beyonce.horse </div>
+    <div id="modal" class="hidden">
+      <div id="modal-leftpane">
+        <p>Full-time inquiries</p>
+        <p>Freelance inquiries</p>
+        <p>Anything else</p>
+      </div>
+      <div id="modal-rightpane">
+        <p>fulltime.brmscheiner@gmail.com</p>
+        <p>freelance.brmscheiner@gmail.com</p>
+        <p>brmscheiner@gmail.com</p>
+      </div>
+    </div>
     <div id="content">
       <div id="intro">
         <h1> Ben Scheiner </h1>
@@ -45,7 +56,7 @@ Ease in div resizing.
       <img class="divider" src="img/line-divider.png">
       <div id="social">
         <a href="https://github.com/brmscheiner"><img src="img/github-icon.png" height=50px></a>
-        <a id="contact-info" href="#"><img src="img/email-icon.png" height=32px></a>
+        <a id="contact-info" href="#"><img src="img/email-icon.png" height=50px></a>
       </div>
     </div>
     <script>
@@ -218,6 +229,12 @@ Ease in div resizing.
         document.getElementById("modal").className=""
         document.getElementById("modal-background").className=""
         document.body.className="no-scroll"
+      })
+
+      document.getElementById("modal-background").addEventListener("click", function () {
+        document.getElementById("modal").className="hidden"
+        document.getElementById("modal-background").className="hidden"
+        document.body.className=""
       })
 
     </script>
