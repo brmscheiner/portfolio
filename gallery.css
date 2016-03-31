@@ -1,0 +1,23 @@
+body {
+  overflow-x: hidden;
+  padding-top: 40px;
+  font-family: 'Playfair Display'
+}
+
+div {
+    padding-bottom: 15px;
+}
+
+#description {
+  width: 800px;
+}
+
+.forcenode {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
