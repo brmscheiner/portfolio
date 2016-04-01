@@ -1,9 +1,3 @@
-<!-- wishlist
-Add a div that includes links to projects that I refer to in the above text.
-Ease in div resizing and modal.
-Fix animation.
- -->
-
 <html>
   <head>
     <meta charset="utf-8">
@@ -11,7 +5,7 @@ Fix animation.
     <!-- <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic' rel='stylesheet' type='text/css'> -->
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:100' rel='stylesheet' type='text/css'>
     <link href="index.css" rel="stylesheet" type="text/css" />
-    <script src="anagram.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <title>Ben Scheiner</title>
   </head>
 
@@ -29,215 +23,176 @@ Fix animation.
         <p>brmscheiner@gmail.com</p>
       </div>
     </div>
-    <div id="content">
+    <div id="all">
       <div id="intro">
         <h1> Ben Scheiner </h1>
         <p> I am a developer with professional experience in
-          <a id="DATA" href="#">data modeling</a> and
-          <a id="VIZ" href="#">visualization</a>. I spent the beginning of 2016
-          at the <a id="RC" href="#">Recurse Center</a> and worked at the
-          <a id="FRB" href="#">Federal Reserve Board</a> from 2013 to 2015.
-          At <a id="TRI" href="#">Trinity University</a>, I double majored in
+          <a id="modeling" class="show_div" href="#/">data modeling</a> and
+          <a id="visualization" class="show_div" href="#/">visualization</a>. I spent the beginning of 2016
+          at the <a id="rc" class="show_div" href="#/">Recurse Center</a> and worked at the
+          <a id="fed" class="show_div" href="#/">Federal Reserve Board</a> from 2013 to 2015.
+          At <a id="trinity" class="show_div" href="#/">Trinity University</a>, I double majored in
           math and economics. I have experience with
-          <a id="PY" href="#">Python</a>,
-          <a id="JS" href="#">Javascript</a>,
-          <a id="C" href="#">C</a>,
-          <a id="D3" href="#">D3</a>,
-          <a id="MTLB" href="#">Matlab</a>,
-          <a id="BASH" href="#">Bash</a>,
-          and <a id="PRO" href="#">Processing</a>, but I love learning new languages too!
+          <a id="python" class="show_div" href="#/">Python</a>,
+          <a id="javascript" class="show_div" href="#/">Javascript</a>,
+          <a id="c" class="show_div" href="#/">C</a>,
+          <a id="d3" class="show_div" href="#/">D3</a>,
+          <a id="matlab" class="show_div" href="#/">Matlab</a>, and
+          <a id="bash" class="show_div" href="#/">Bash</a>, but I love learning new languages too!
         </p>
       </div>
+
       <img class="divider" src="img/line-divider.png">
-      <div id="anagram-big"></div>
-      <div id="anagram-small"></div>
-      <div id="project-links"><div>
+
+      <div class="showing"></div>
+      <div class="modeling_container content" style="display:none">
+        <p>
+          At school I studied math and econometrics, and further refined
+          my analytical abilities while working at the Federal Reserve. I have
+          extensive experience with applied econometrics and regression analysis,
+          and exposure to many lesser known tools like Bayesian statistics,
+          impulse response functions, and stochastic processes. On the data
+          pipeline side, a huge part of my job at the Fed involved managing
+          the flow of data into our internal databases.
+        </p>
+      </div>
+      <div class="visualization_container content" style="display:none">
+        <p>
+          Visualization is my passion. Most of my work at the Fed was about
+          bringing data to life to create strong decision-making tools. The
+          visualizations I worked on were subject to strict academic standards
+          and were used in papers, briefings to the Board of Governors, and Fed
+          publications. Since I left the Board, most of my visualizations have been
+          art projects, and I have focused on learning tools that will enable me to
+          share my work on the web, like P5 and D3.
+        </p>
+      </div>
+      <div class="python_container content" style="display:none">
+        <p>
+          Python is definitely my strongest language. Most of the coursework for 
+          my computer science minor was in Python, I used it all the time at the 
+          Federal Reserve to write data processing scripts, and it was the 
+          language I used for my most ambitious projects at the Recurse Center. 
+          I am comfortable with many of the more advanced features of the 
+          language, such as generators and metaclasses.
+        </p>
+      </div>
+      <div class="d3_container content" style="display:none">
+        <p>
+          Ideogram, a project that helps developers take pride in their Python 
+          software projects, uses D3 templates to generate visualizations based on 
+          source code. In putting this project together, I took advantage of some of 
+          D3's built-in layouts to generate force-directed networks and enclosure diagrams, 
+          but I also built a custom radial gearing layout. 
+        </p>
+      </div>
+      <div class="javascript_container content" style="display:none">
+        <p>
+          The transition effect used on this site was written in Javascript. 
+          Most of my other Javascript experience comes from generating 
+          visualizations in libraries like D3 and P5.
+        </p>
+      </div>
+      <div class="c_container content" style="display:none">
+        <p>
+          At the Recurse Center I read Kernighan and Ritchie's classic book 
+          on C. In addition to becoming familiar with how memory management works, 
+          I found it fascinating to learn how bash functions like 'cp' and 'ls' 
+          work in practice. I also implemented the Lempel-Ziv-Welch (LZW) compression algorithm.
+        </p>
+      </div>
+      <div class="matlab_container content" style="display:none">
+        <p>
+          At the Federal Reserve, I implemented a model of 
+          monetary policy contagion in Matlab. In addition, many of the ad hoc 
+          charts I worked on were generated in Matlab, including some 
+          3D visualizations.
+        </p>
+      </div>
+      <div class="fed_container content" style="display:none">
+        <p>
+          Senior Research Assistant, Federal Reserve Board of Governors
+          Global Financial Markets, July 2013 – June 2015"
+           <li>Created polished, elegant chart exhibits for the Teal Book and 
+          briefings to the Board of Governors on tight schedules.</li>
+          <li>Wrote scripts that organize financial data from dozens of sources
+          into a common database.</li>
+           <li>Implemented statistical models for analyis and research projects.</li>
+           <li>Forecasted policy rate paths based on long-term exchange rates.</li>
+           <li>Served as Director of FedEd, the Board's education and outreach
+          program for research assistants.</li>
+        </p>
+      </div>
+      <div class="bash_container content" style="display:none">
+        <p>
+          At the Recurse Center I built zlp, a command line interface for Zulip. 
+          As a long time Linux user, I am relatively comfortable writing shell 
+          scripts and getting work done in the terminal.
+        </p>
+      </div>
+      <div class="rc_container content" style="display:none">
+        <p>
+          Recurse Center
+          January - March 2016
+          The Recurse Center is a project-oriented educational retreat for programmers.
+          <ul>
+              <li>Implemented Lempel-Ziv-Welch compression in C.</li>
+              <li>Developed a command line interface for Zulip using their RESTful API in Python.</li>
+              <li>Created a conspiracy theory generating twitterbot in Python.</li>
+              <li>Wrote a Sudoku generator in Haskell.</li>
+              <li>Developed a letter switching transition effect in Javascript.</li>
+              <li>Ideogram: generate visual fingerprints of a project's source code.</li>
+              <ul>
+                <li>Creates call graphs by statically parsing Python source code into 
+          abstract syntax trees and matching function calls to function 
+          definitions.</li>
+                <li>Generates force directed graphs, enclosure diagrams, and custom  
+          gear layouts using D3 templates and pystache.</li>
+              </ul>
+          <ul>
+        </p>
+      </div>
+      <div class="trinity_container content" style="display:none">
+        <p>
+          Trinity University
+          August 2009 - May 2013
+          <ul>
+               <li>BA, Mathematics and Theoretical Economics. GPA 3.6/4.0.</li>
+               <li>Minor in Computer Science.</li>
+           </ul>
+        </p>
+      </div>
+
       <img class="divider" src="img/line-divider.png">
+
       <div id="social">
         <a href="https://github.com/brmscheiner"><img src="img/github-icon.png" height=50px></a>
         <a id="contact-info" href="#"><img src="img/email-icon.png" height=50px></a>
       </div>
     </div>
+
     <script>
       "use strict"
-
-      let header_data = ""
-      let content_data =
-      "At school I studied math and econometrics, and further refined "+
-      "my analytical abilities while working at the Federal Reserve. I have "+
-      "extensive experience with applied econometrics and regression analysis, "+
-      "and exposure to many lesser known tools like Bayesian statistics, "+
-      "impulse response functions, and stochastic processes. On the data "+
-      "pipeline side, a huge part of my job at the Fed involved managing "+
-      "the flow of data into our internal databases."
-      let header_viz = ""
-      let content_viz =
-      "Visualization is my passion. Most of my work at the Fed was about "+
-      "bringing data to life to create strong decision-making tools. The "+
-      "visualizations I worked on were subject to strict academic standards "+
-      "and were used in papers, briefings to the Board of Governors, and Fed "+
-      "publications. Since I left the Board, most of my visualizations have been "+
-      "art projects, and I have focused on learning tools that will enable me to "+
-      "share my work on the web, like P5 and D3."
-      let header_py = ""
-      let content_py =
-      "Python is definitely my strongest language. Most of the coursework for "+
-      "my computer science minor was in Python, I used it all the time at the "+
-      "Federal Reserve to write data processing scripts, and it was the "+
-      "language I used for my most ambitious projects at the Recurse Center. "+
-      "I am comfortable with many of the more advanced features of the "+
-      "language, such as generators and metaclasses."
-      let header_d3 = ""
-      let content_d3 =
-      "Ideogram, a project that helps developers take pride in their Python "+
-      "software projects, uses D3 templates to generate visualizations based on "+
-      "source code. In putting this project together, I took advantage of some of "+
-      "D3's built-in layouts to generate force-directed networks and enclosure diagrams, "+
-      "but I also built a custom radial gearing layout. "
-      let header_js = ""
-      let content_js =
-      "The transition effect used on this site was written in Javascript. "+
-      "Most of my other Javascript experience comes from generating "+
-      "visualizations in libraries like D3 and P5."
-      let header_c = ""
-      let content_c =
-      "At the Recurse Center I read Kernighan and Ritchie's classic book "+
-      "on C. In addition to becoming familiar with how memory management works, "+
-      "I found it fascinating to learn how bash functions like 'cp' and 'ls' "+
-      "work in practice. I also implemented the Lempel-Ziv-Welch (LZW) compression algorithm."
-      let header_mtlb = ""
-      let content_mtlb = "At the Federal Reserve, I implemented a model of "+
-      "monetary policy contagion in Matlab. In addition, many of the ad hoc "+
-      "charts I worked on were generated in Matlab, including some "+
-      "3D visualizations."
-      let header_frb =
-      "Senior Research Assistant, Federal Reserve Board of Governors\n"+
-      "Global Financial Markets, July 2013 – June 2015"
-      let content_frb =
-      " • Created polished, elegant chart exhibits for the Teal Book and "+
-      "briefings to the Board of Governors on tight schedules.\n"+
-      " • Wrote scripts that organize financial data from dozens of sources"+
-      "into a common database.\n"+
-      " • Implemented statistical models for analyis and research projects.\n"+
-      " • Forecasted policy rate paths based on long-term exchange rates.\n"+
-      " • Served as Director of FedEd, the Board's education and outreach"+
-      "program for research assistants."
-      let header_bash = ""
-      let content_bash =
-      "At the Recurse Center I built zlp, a command line interface for Zulip. "+
-      "As a long time Linux user, I am relatively comfortable writing shell "+
-      "scripts and getting work done in the terminal."
-      let header_rc =
-      "Recurse Center\n"+
-      "January - March 2016"
-      let content_rc =
-      "The Recurse Center is a project-oriented educational retreat for programmers.\n"+
-      " • Implemented Lempel-Ziv-Welch compression in C.\n"+
-      " • Developed a command line interface for Zulip using their RESTful "+
-      "API in Python.\n"+
-      " • Created a conspiracy theory generating twitterbot in Python.\n"+
-      " • Wrote a Sudoku generator in Haskell.\n"+
-      " • Developed a letter switching transition effect in Javascript.\n"+
-      " • Ideogram: generate visual fingerprints of a project's source code.\n"+
-      "    ◦ Creates call graphs by statically parsing Python source code into "+
-      "abstract syntax trees and matching function calls to function "+
-      "definitions.\n"+
-      "    ◦ Generates force directed graphs, enclosure diagrams, and custom  "+
-      "gear layouts using D3 templates and pystache."
-      let header_pro = ""
-      let content_pro =
-      "Processing is my go-to environment for bringing whimsical ideas to life. "+
-      "For example, after spending 2 months at ATTA, an ant-themed coworking "+
-      "space in Barcelona, I wrote a script that makes virtual ants "+
-      "crawl into the shape of the ATTA logo."
-      let header_tri =
-      "Trinity University\n"+
-      "August 2009 - May 2013"
-      let content_tri =
-      " • BA, Mathematics and Theoretical Economics. GPA 3.6/4.0.\n"+
-      " • Minor in Computer Science."
-
-      let small_anagram = new Anagram()
-      small_anagram.initialize({
-       container: document.getElementById("anagram-small"),
-       states: {
-         "small_state_start": "",
-         "small_state_PY": content_py,
-         "small_state_MTLB": content_mtlb,
-         "small_state_C": content_c,
-         "small_state_D3": content_d3,
-         "small_state_RC": content_rc,
-         "small_state_BASH": content_bash,
-         "small_state_FRB": content_frb,
-         "small_state_PRO": content_pro,
-         "small_state_JS": content_js,
-         "small_state_TRI": content_tri,
-         "small_state_VIZ": content_viz,
-         "small_state_DATA": content_data
-       },
-       mode: "normal",
-       duration: 0.3 // in seconds
+      $(".show_div").click(function () {
+        var id = this.id;
+        $(".showing").fadeOut('slow', function () {
+            $(".showing").removeClass("showing");
+            $("."+id+"_container").addClass("showing");
+            $("."+id+"_container").fadeIn('slow');
+        });
       })
-
-      let big_anagram = new Anagram()
-      big_anagram.initialize({
-       container: document.getElementById("anagram-big"),
-       states: {
-         "big_state_start": "",
-         "big_state_PY": header_py,
-         "big_state_MTLB": header_mtlb,
-         "big_state_C": header_c,
-         "big_state_D3": header_d3,
-         "big_state_RC": header_rc,
-         "big_state_BASH": header_bash,
-         "big_state_FRB": header_frb,
-         "big_state_PRO": header_pro,
-         "big_state_JS": header_js,
-         "big_state_TRI": header_tri,
-         "big_state_VIZ": header_viz,
-         "big_state_DATA": header_data
-       },
-       mode: "normal",
-       duration: 0.3 // in seconds
-      })
-
-      document.getElementById("PY").addEventListener("click", () => small_anagram.animateTo("small_state_PY"))
-      document.getElementById("MTLB").addEventListener("click", () => small_anagram.animateTo("small_state_MTLB"))
-      document.getElementById("C").addEventListener("click", () => small_anagram.animateTo("small_state_C"))
-      document.getElementById("D3").addEventListener("click", () => small_anagram.animateTo("small_state_D3"))
-      document.getElementById("RC").addEventListener("click", () => small_anagram.animateTo("small_state_RC"))
-      document.getElementById("FRB").addEventListener("click", () => small_anagram.animateTo("small_state_FRB"))
-      document.getElementById("BASH").addEventListener("click", () => small_anagram.animateTo("small_state_BASH"))
-      document.getElementById("JS").addEventListener("click", () => small_anagram.animateTo("small_state_JS"))
-      document.getElementById("PRO").addEventListener("click", () => small_anagram.animateTo("small_state_PRO"))
-      document.getElementById("TRI").addEventListener("click", () => small_anagram.animateTo("small_state_TRI"))
-      document.getElementById("VIZ").addEventListener("click", () => small_anagram.animateTo("small_state_VIZ"))
-      document.getElementById("DATA").addEventListener("click", () => small_anagram.animateTo("small_state_DATA"))
-
-      document.getElementById("PY").addEventListener("click", () => big_anagram.animateTo("big_state_PY"))
-      document.getElementById("MTLB").addEventListener("click", () => big_anagram.animateTo("big_state_MTLB"))
-      document.getElementById("C").addEventListener("click", () => big_anagram.animateTo("big_state_C"))
-      document.getElementById("D3").addEventListener("click", () => big_anagram.animateTo("big_state_D3"))
-      document.getElementById("RC").addEventListener("click", () => big_anagram.animateTo("big_state_RC"))
-      document.getElementById("FRB").addEventListener("click", () => big_anagram.animateTo("big_state_FRB"))
-      document.getElementById("BASH").addEventListener("click", () => big_anagram.animateTo("big_state_BASH"))
-      document.getElementById("JS").addEventListener("click", () => big_anagram.animateTo("big_state_JS"))
-      document.getElementById("PRO").addEventListener("click", () => big_anagram.animateTo("big_state_PRO"))
-      document.getElementById("TRI").addEventListener("click", () => big_anagram.animateTo("big_state_TRI"))
-      document.getElementById("VIZ").addEventListener("click", () => big_anagram.animateTo("big_state_VIZ"))
-      document.getElementById("DATA").addEventListener("click", () => big_anagram.animateTo("big_state_DATA"))
-
-      document.getElementById("contact-info").addEventListener("click", function () {
-        document.getElementById("modal").className=""
-        document.getElementById("modal-background").className=""
-        document.body.className="no-scroll"
-      })
-
-      document.getElementById("modal-background").addEventListener("click", function () {
-        document.getElementById("modal").className="hidden"
-        document.getElementById("modal-background").className="hidden"
-        document.body.className=""
-      })
+      
+      $("#contact-info").click(function () {
+        $("#modal").fadeIn('slow')
+        $("#modal-background").fadeIn('slow')
+        $('body').addClass('no-scroll')
+      });
+      
+      $("#modal-background").click(function () {
+        $("#modal").fadeOut('slow')
+        $("#modal-background").fadeOut('slow')
+        $('body').removeClass('no-scroll')
+      });
 
     </script>
   </body>

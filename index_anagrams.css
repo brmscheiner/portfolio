@@ -1,10 +1,14 @@
 body {
   overflow-x: hidden;
   padding-top: 40px;
-  font-family: 'Playfair Display';
+  font-family: 'Playfair Display'
 }
 
-#all {
+.no-scroll {
+  overflow-y: hidden;
+}
+
+#content {
   width: 42%;
   margin: 0 auto;
   line-height: 1.5em;
@@ -17,6 +21,19 @@ h1 {
 
 #intro {
   text-align: justify;
+}
+
+#anagram-big {
+  font-weight: 700;
+}
+
+#anagram-small {
+  font-size: 100%;
+  /*-moz-transition: height 1s ease-in;
+  -webkit-transition: height 1s ease-in;
+  -moz-transition:height 1s ease-in;
+  -o-transition:height 1s ease-in;
+  transition:height 1s ease-in;*/
 }
 
 #social img {
@@ -79,11 +96,11 @@ a {
   color: #665155;
 }
 
-.no-scroll {
-  overflow-y: hidden;
-}
-
 .invisible {
   position: absolute;
   opacity: 0;
+}
+
+.char, .word {
+  display: inline-block;
 }
