@@ -1,6 +1,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.css" rel='stylesheet' type='text/css'></script>
     <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700' rel='stylesheet' type='text/css'>
     <!-- <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic' rel='stylesheet' type='text/css'> -->
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:100' rel='stylesheet' type='text/css'>
@@ -24,21 +25,21 @@
       </div>
     </div>
     <div id="all">
+    <div id="pez"><img src="img/ben.png"></div>
+    <div id="txt">
       <div id="intro">
         <h1> Ben Scheiner </h1>
         <p> I am a developer with professional experience in
-          <a id="modeling" class="show_div" href="#/">data modeling</a> and
+          <a id="modeling" class="show_div" href="#/">data science</a> and
           <a id="visualization" class="show_div" href="#/">visualization</a>. I spent the beginning of 2016
           at the <a id="rc" class="show_div" href="#/">Recurse Center</a> and worked at the
           <a id="fed" class="show_div" href="#/">Federal Reserve Board</a> from 2013 to 2015.
           At <a id="trinity" class="show_div" href="#/">Trinity University</a>, I double majored in
-          math and economics. I have experience with
+          Math and Theoretical Economics. I have worked with
           <a id="python" class="show_div" href="#/">Python</a>,
           <a id="javascript" class="show_div" href="#/">Javascript</a>,
-          <a id="c" class="show_div" href="#/">C</a>,
-          <a id="d3" class="show_div" href="#/">D3</a>,
-          <a id="matlab" class="show_div" href="#/">Matlab</a>, and
-          <a id="bash" class="show_div" href="#/">Bash</a>, but I love learning new languages too!
+          <a id="c" class="show_div" href="#/">C</a>, and
+          <a id="matlab" class="show_div" href="#/">Matlab</a>, but I love learning new languages too!
         </p>
       </div>
 
@@ -47,101 +48,66 @@
       <div class="showing"></div>
       <div class="modeling_container content" style="display:none">
         <p>
-          At school I studied math and econometrics, and further refined
-          my analytical abilities while working at the Federal Reserve. I have
-          extensive experience with applied econometrics and regression analysis,
-          and exposure to many lesser known tools like Bayesian statistics,
-          impulse response functions, and stochastic processes. On the data
-          pipeline side, a huge part of my job at the Fed involved managing
-          the flow of data into our internal databases.
+          At school I studied higher level statistics and econometrics. At the Federal Reserve,
+          I had the opportunity to apply many of the techiques I learned to real world problems. 
+          I have extensive experience with regression analysis and exposure to Bayesian 
+          statistics, impulse response functions, and stochastic processes.
         </p>
       </div>
       <div class="visualization_container content" style="display:none">
         <p>
-          Visualization is my passion. Most of my work at the Fed was about
-          bringing data to life to create strong decision-making tools. The
-          visualizations I worked on were subject to strict academic standards
-          and were used in papers, briefings to the Board of Governors, and Fed
-          publications. Since I left the Board, most of my visualizations have been
-          art projects, and I have focused on learning tools that will enable me to
-          share my work on the web, like P5 and D3.
+          I am passionate about bringing data to life. At the Federal Reserve, I created chart 
+          exhibits that were used in papers and briefings to the Board of Governors. At the 
+          Recurse Center, I became familiar with D3 and P5 so that I could create interactive 
+          visualizations for the web. My most recent project is <a href="ideogram.html">Ideogram</a>.
         </p>
       </div>
       <div class="python_container content" style="display:none">
         <p>
-          Python is definitely my strongest language. Most of the coursework for 
-          my computer science minor was in Python, I used it all the time at the 
-          Federal Reserve to write data processing scripts, and it was the 
-          language I used for my most ambitious projects at the Recurse Center. 
-          I am comfortable with many of the more advanced features of the 
-          language, such as generators and metaclasses.
-        </p>
-      </div>
-      <div class="d3_container content" style="display:none">
-        <p>
-          Ideogram, a project that helps developers take pride in their Python 
-          software projects, uses D3 templates to generate visualizations based on 
-          source code. In putting this project together, I took advantage of some of 
-          D3's built-in layouts to generate force-directed networks and enclosure diagrams, 
-          but I also built a custom radial gearing layout. 
+          Python is my strongest language. At the Federal Reserve, I used 
+          it to write data processing scripts. <a href="ideogram.html">Ideogram</a> analyzes Python code and is written in Python. 
+          I am familiar with generators, decorators, and many libraries, including
+          requests, ast, pandas, and matplotlib.
         </p>
       </div>
       <div class="javascript_container content" style="display:none">
         <p>
-          The transition effect used on this site was written in Javascript. 
-          Most of my other Javascript experience comes from generating 
-          visualizations in libraries like D3 and P5.
+          It goes without saying that the interactions on this site were written in Javascript. I am familiar with a few
+          libraries, such as D3, P5, and JQuery. 
         </p>
       </div>
       <div class="c_container content" style="display:none">
         <p>
-          At the Recurse Center I read Kernighan and Ritchie's classic book 
-          on C. In addition to becoming familiar with how memory management works, 
-          I found it fascinating to learn how bash functions like 'cp' and 'ls' 
-          work in practice. I also implemented the Lempel-Ziv-Welch (LZW) compression algorithm.
+          At the Recurse Center, I learned C and implemented Lempel-Ziv-Welch (LZW) compression. 
         </p>
       </div>
       <div class="matlab_container content" style="display:none">
         <p>
-          At the Federal Reserve, I implemented a model of 
-          monetary policy contagion in Matlab. In addition, many of the ad hoc 
-          charts I worked on were generated in Matlab, including some 
-          3D visualizations.
+          At the Federal Reserve, I implemented models of monetary policy contagion in Matlab. 
+          In addition, I used Matlab for many data requests and charts, including some 3D visualizations.
         </p>
       </div>
       <div class="fed_container content" style="display:none">
         <p>
-          Senior Research Assistant, Federal Reserve Board of Governors
-          Global Financial Markets, July 2013 – June 2015"
-           <li>Created polished, elegant chart exhibits for the Teal Book and 
-          briefings to the Board of Governors on tight schedules.</li>
-          <li>Wrote scripts that organize financial data from dozens of sources
-          into a common database.</li>
-           <li>Implemented statistical models for analyis and research projects.</li>
-           <li>Forecasted policy rate paths based on long-term exchange rates.</li>
+        <div class="left_container">Federal Reserve Board of Governors</div>
+        <div class="right_container">Global Financial Markets</div>
+        <div class="left_container">Senior Research Assistant</div>
+        <div class="right_container">July 2013 – June 2015</div>
+           <li>Created charts that were published in papers, used for exploratory data analysis,
+            and presented to the Board of Governors.</li>
+           <li>Implemented complex econometric models in Matlab and Python.</li>
+           <li>Managed the flow of data into our internal databases.</li>
            <li>Served as Director of FedEd, the Board's education and outreach
           program for research assistants.</li>
         </p>
       </div>
-      <div class="bash_container content" style="display:none">
-        <p>
-          At the Recurse Center I built zlp, a command line interface for Zulip. 
-          As a long time Linux user, I am relatively comfortable writing shell 
-          scripts and getting work done in the terminal.
-        </p>
-      </div>
       <div class="rc_container content" style="display:none">
-        <p>
-          Recurse Center
-          January - March 2016
-          The Recurse Center is a project-oriented educational retreat for programmers.
+        <div class="left_container">Recurse Center</div>
+        <div class="right_container">January - March 2016</div>
+          <i>The Recurse Center is a project-oriented educational retreat for programmers.</i>
           <ul>
               <li>Implemented Lempel-Ziv-Welch compression in C.</li>
-              <li>Developed a command line interface for Zulip using their RESTful API in Python.</li>
-              <li>Created a conspiracy theory generating twitterbot in Python.</li>
-              <li>Wrote a Sudoku generator in Haskell.</li>
-              <li>Developed a letter switching transition effect in Javascript.</li>
-              <li>Ideogram: generate visual fingerprints of a project's source code.</li>
+              <li>Developed <a href="ideogram.html">Ideogram</a>, a Python package that generates diagrams of source code.</li>
               <ul>
                 <li>Creates call graphs by statically parsing Python source code into 
           abstract syntax trees and matching function calls to function 
@@ -150,17 +116,19 @@
           gear layouts using D3 templates and pystache.</li>
               </ul>
           <ul>
-        </p>
       </div>
       <div class="trinity_container content" style="display:none">
-        <p>
-          Trinity University
-          August 2009 - May 2013
+      <div class="clearfix">
+        <div class="left_container">Trinity University</div>
+        <div class="right_container">August 2009 - May 2013</div>
+      </div>
+      <div class="clearfix">
           <ul>
-               <li>BA, Mathematics and Theoretical Economics. GPA 3.6/4.0.</li>
-               <li>Minor in Computer Science.</li>
+               <li>Double major in Math and Theoretical Economics. Minor in Computer Science.</li>
+               <li>President of &Omicron;&Delta;&Epsilon;, the international honor society for economics.</li>
+               <li>President of the Racquetball Club, 2011-2012. </li>
            </ul>
-        </p>
+      </div>
       </div>
 
       <img class="divider" src="img/line-divider.png">
@@ -170,15 +138,16 @@
         <a id="contact-info" href="#"><img src="img/email-icon.png" height=50px></a>
       </div>
     </div>
+    </div>
 
     <script>
       "use strict"
       $(".show_div").click(function () {
         var id = this.id;
-        $(".showing").fadeOut('slow', function () {
+        $(".showing").fadeOut(function () {
             $(".showing").removeClass("showing");
             $("."+id+"_container").addClass("showing");
-            $("."+id+"_container").fadeIn('slow');
+            $("."+id+"_container").fadeIn();
         });
       })
       

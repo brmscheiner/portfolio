@@ -1,11 +1,3 @@
-short term:
-fade-in animation effect 
-project links 
-edit text 
-make it work in firefox 
-
-long term:
+Add to Ideogram gallery
 Take better photo 
-Add photo/svg me 
-Give github icon red hair 
 Fix animation effect 

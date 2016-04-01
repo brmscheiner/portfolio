@@ -5,18 +5,25 @@ body {
 }
 
 #all {
-  width: 42%;
+    width: 58%;
+    margin-left: 17%;
+}
+
+#pez {
+    float: left;
+    width: 24%;
+}
+
+#txt {
+  width: 76%;
   margin: 0 auto;
   line-height: 1.5em;
-  text-align: left;
+  text-align: justify;
+  float: right;
 }
 
 h1 {
   font-family: 'Roboto Slab', sans-serif;
-}
-
-#intro {
-  text-align: justify;
 }
 
 #social img {
@@ -24,6 +31,21 @@ h1 {
   z-index: 1;
   display: block;
   margin: 0 auto;
+}
+
+.hidden {
+  display: none;
+}
+
+.right_container {
+    text-align: right;
+    width: 100%;
+}
+
+.left_container {
+    text-align: left;
+    float: left;
+    width: 50%;
 }
 
 #modal {
@@ -37,25 +59,7 @@ h1 {
   height: 128px;
   background-color: rgba(223,228,229,0.9);
   width: 43%;
-  -webkit-transition: opacity 400ms ease in;
-  -moz-transition: opacity 400ms ease in;
-  transition: opacity 400ms ease in;
   border-radius: 10px;
-}
-
-#modal-leftpane {
-  margin-left: 30px;
-  float: left;
-  width: 40%;
-  font-weight: bold;
-}
-
-#modal-rightpane {
-  float: left;
-}
-
-.hidden {
-  display: none;
 }
 
 #modal-background {
@@ -71,6 +75,17 @@ h1 {
   width: 100%;
 }
 
+#modal-leftpane {
+  margin-left: 30px;
+  float: left;
+  width: 40%;
+  font-weight: bold;
+}
+
+#modal-rightpane {
+  float: left;
+}
+
 img.divider {
   width: 100%;
 }
@@ -79,11 +94,11 @@ a {
   color: #665155;
 }
 
-.no-scroll {
-  overflow-y: hidden;
+ul {
+    margin-top: 0px;
+    padding-left: 20px;
 }
 
-.invisible {
-  position: absolute;
-  opacity: 0;
+.no-scroll {
+  overflow-y: hidden;
 }
