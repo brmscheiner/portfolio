@@ -5,6 +5,16 @@ body {
 }
 
 #all {
+    width: 58%;
+    margin-left: 17%;
+}
+
+#pez {
+    float: left;
+    width: 24%;
+}
+
+#txt {
   width: 76%;
   margin: 0 auto;
   line-height: 1.5em;
@@ -14,12 +24,6 @@ body {
 
 h1 {
   font-family: 'Roboto Slab', sans-serif;
-}
-
-#social {
-    position: fixed;
-    bottom: 0;
-    right: 10px;
 }
 
 #social img {

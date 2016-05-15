@@ -3,10 +3,11 @@
     <meta charset="utf-8">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.css" rel='stylesheet' type='text/css'></script>
     <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700' rel='stylesheet' type='text/css'>
-    <!-- <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic' rel='stylesheet' type='text/css'> -->
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:100' rel='stylesheet' type='text/css'>
     <link href="index.css" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/p5.js"></script>
+    <script language="javascript" type="text/javascript" src="js/mas.js"></script>
     <title>Ben Scheiner</title>
   </head>
 
@@ -25,114 +26,8 @@
       </div>
     </div>
     <div id="all">
-    <div id="pez"><img src="img/ben.png"></div>
-    <div id="txt">
-      <div id="intro">
-        <h1> Ben Scheiner </h1>
-        <p> I am a developer with professional experience in
-          <a id="modeling" class="show_div" href="#/">data science</a> and
-          <a id="visualization" class="show_div" href="#/">visualization</a>. I spent the beginning of 2016
-          at the <a id="rc" class="show_div" href="#/">Recurse Center</a> and worked at the
-          <a id="fed" class="show_div" href="#/">Federal Reserve Board</a> from 2013 to 2015.
-          At <a id="trinity" class="show_div" href="#/">Trinity University</a>, I double majored in
-          Math and Theoretical Economics. I have worked with
-          <a id="python" class="show_div" href="#/">Python</a>,
-          <a id="javascript" class="show_div" href="#/">Javascript</a>,
-          <a id="c" class="show_div" href="#/">C</a>, and
-          <a id="matlab" class="show_div" href="#/">Matlab</a>, but I love learning new languages too!
-        </p>
-      </div>
-
-      <img class="divider" src="img/line-divider.png">
-
-      <div class="showing"></div>
-      <div class="modeling_container content" style="display:none">
-        <p>
-          At school I studied higher level statistics and econometrics. At the Federal Reserve,
-          I had the opportunity to apply many of the techiques I learned to real world problems. 
-          I have extensive experience with regression analysis and exposure to Bayesian 
-          statistics, impulse response functions, and stochastic processes.
-        </p>
-      </div>
-      <div class="visualization_container content" style="display:none">
-        <p>
-          I am passionate about bringing data to life. At the Federal Reserve, I created chart 
-          exhibits that were used in papers and briefings to the Board of Governors. At the 
-          Recurse Center, I became familiar with D3 and P5 so that I could create interactive 
-          visualizations for the web. My most recent project is <a href="ideogram.html">Ideogram</a>.
-        </p>
-      </div>
-      <div class="python_container content" style="display:none">
-        <p>
-          Python is my strongest language. At the Federal Reserve, I used 
-          it to write data processing scripts. <a href="ideogram.html">Ideogram</a> analyzes Python code and is written in Python. 
-          I am familiar with generators, decorators, and many libraries, including
-          requests, ast, pandas, and matplotlib.
-        </p>
-      </div>
-      <div class="javascript_container content" style="display:none">
-        <p>
-          It goes without saying that the interactions on this site were written in Javascript. I am familiar with a few
-          libraries, such as D3, P5, and JQuery. 
-        </p>
-      </div>
-      <div class="c_container content" style="display:none">
-        <p>
-          At the Recurse Center, I learned C and implemented Lempel-Ziv-Welch (LZW) compression. 
-        </p>
-      </div>
-      <div class="matlab_container content" style="display:none">
-        <p>
-          At the Federal Reserve, I implemented models of monetary policy contagion in Matlab. 
-          In addition, I used Matlab for many data requests and charts, including some 3D visualizations.
-        </p>
-      </div>
-      <div class="fed_container content" style="display:none">
-        <p>
-        <div class="left_container">Federal Reserve Board of Governors</div>
-        <div class="right_container">Global Financial Markets</div>
-        <div class="left_container">Senior Research Assistant</div>
-        <div class="right_container">July 2013 – June 2015</div>
-           <li>Created charts that were published in papers, used for exploratory data analysis,
-            and presented to the Board of Governors.</li>
-           <li>Implemented complex econometric models in Matlab and Python.</li>
-           <li>Managed the flow of data into our internal databases.</li>
-           <li>Served as Director of FedEd, the Board's education and outreach
-          program for research assistants.</li>
-        </p>
-      </div>
-      <div class="rc_container content" style="display:none">
-        <div class="left_container">Recurse Center</div>
-        <div class="right_container">January - March 2016</div>
-          <i>The Recurse Center is a project-oriented educational retreat for programmers.</i>
-          <ul>
-              <li>Implemented Lempel-Ziv-Welch compression in C.</li>
-              <li>Developed <a href="ideogram.html">Ideogram</a>, a Python package that generates diagrams of source code.</li>
-              <ul>
-                <li>Creates call graphs by statically parsing Python source code into 
-          abstract syntax trees and matching function calls to function 
-          definitions.</li>
-                <li>Generates force directed graphs, enclosure diagrams, and custom  
-          gear layouts using D3 templates and pystache.</li>
-              </ul>
-          <ul>
-      </div>
-      <div class="trinity_container content" style="display:none">
-      <div class="clearfix">
-        <div class="left_container">Trinity University</div>
-        <div class="right_container">August 2009 - May 2013</div>
-      </div>
-      <div class="clearfix">
-          <ul>
-               <li>Double major in Math and Theoretical Economics. Minor in Computer Science.</li>
-               <li>President of &Omicron;&Delta;&Epsilon;, the international honor society for economics.</li>
-               <li>President of the Racquetball Club, 2011-2012. </li>
-           </ul>
-      </div>
-      </div>
-
-      <img class="divider" src="img/line-divider.png">
-
+      <div id="canvasContainer"></div>
+        Hi
       <div id="social">
         <a href="https://github.com/brmscheiner"><img src="img/github-icon.png" height=50px></a>
         <a id="contact-info" href="#"><img src="img/email-icon.png" height=50px></a>
