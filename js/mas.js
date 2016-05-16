@@ -1,9 +1,12 @@
-var agents = [];
-var trailSize = 1;
+var initialAgents = 20;
+var trailSize = 50;
 var minimumAge = 60;
 var minimumDistance = 20;
 var pregnancyTime = 20;
-var moveDistance = 5;
+var moveDistance = 10;
+
+var agents = [];
+var spawnPoints = [];
 var sketch_p5 = new p5(function(sketch) {
 
     sketch.setup = function() {
@@ -15,8 +18,8 @@ var sketch_p5 = new p5(function(sketch) {
         sketch.ellipseMode(sketch.CENTER);
         sketch.background(0);
         sketch.frameRate(15);
-        for (i=0; i<10; i++) {
-            makeNewAgent(sketch.width/2,sketch.height/2);
+        for (i=0; i<initialAgents; i++) {
+            makeNewAgent(sketch.width/2, sketch.height/2, sketch.random(255), sketch.random(255), sketch.random(255));
         }
     }
     
@@ -26,13 +29,12 @@ var sketch_p5 = new p5(function(sketch) {
             sketch.line(element.x, element.y, element.history[0].x, element.history[0].y);
             for (i=0; i<element.history.length-1; i++) {
                 intensity += 255/trailSize;
-                // sketch.stroke(sketch.random(255));
-                sketch.stroke("rgb("+intensity+","+intensity+","+intensity+")");
+                sketch.stroke(intensity);
                 sketch.line(element.history[i].x, element.history[i].y, element.history[i+1].x, element.history[i+1].y);
             }
         }
-        sketch.stroke("rgb(255,255,255)");
-        sketch.fill("rgb(255,255,255)");
+        sketch.stroke(element.r, element.g, element.b);
+        sketch.fill(element.r, element.g, element.b);
         sketch.ellipse(element.x, element.y, element.size, element.size);
     }
 
@@ -77,13 +79,24 @@ var sketch_p5 = new p5(function(sketch) {
         }
     }
     
+    sketch.killOffscreenAgents = function() {
+        var onScreenAgents = [];
+        for (i=0; i<agents.length; i++) {
+            if ((agents[i].x > 0) && (agents[i].x < sketch.width) && (agents[i].y > 0) && (agents[i].y < sketch.height)) {
+                onScreenAgents.push(agents[i]);
+            }
+        }
+        agents = onScreenAgents;
+    }
+    
     sketch.draw = function() {
-        sketch.background("rgb(0,0,0)");
+        sketch.background(0);
         sketch.strokeWeight(3);
         agents.forEach(sketch.renderAgent);
         agents.forEach(sketch.operateAgent);
         agents.forEach(sketch.incrementAge);
         sketch.breedAgents();
+        sketch.killOffscreenAgents();
     }
 })
 
@@ -105,13 +118,30 @@ breedingPossible = function(agent1, agent2) {
     }
 }
 
-makeNewAgent = function(xpos, ypos) {
+makeNewSpawnPoint = function(agent1, agent2) {
+    spawnPoints.push({
+        timer: pregnancyTime,
+        x: (agent1.x + agent2.x)/2,
+        y: (agent1.y + agent2.y)/2,
+        r1: agent1.r,
+        r2: agent2.r,
+        g1: agent1.g,
+        g2: agent2.g,
+        b1: agent1.b,
+        b2: agent2.b
+    })
+}
+
+makeNewAgent = function(xpos, ypos, rcol, gcol, bcol) {
     agents.push({
             id: agents.length,
             breeding: false,
             babyCountdown: pregnancyTime,
             age: 0,
             size: 5,
+            r: rcol,
+            g: gcol,
+            b: bcol,
             x: xpos,
             y: ypos,
             history: []
