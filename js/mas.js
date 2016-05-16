@@ -1,12 +1,12 @@
-var initialAgents = 20;
-var trailSize = 0;
+var initialAgents = 30;
+var trailSize = 10;
 var headSize = 5;
 var minimumTime = 100;
 var minimumDistance = 20;
 var pregnancyTime = 50;
 var moveDistance = 15;
-var lifeExpectancy = 200;
-var averageChildren = 5;
+var lifeExpectancy = 225;
+var averageChildren = 7;
 
 var agents = [];
 var spawnPoints = [];
@@ -22,8 +22,11 @@ var sketch_p5 = new p5(function(sketch) {
         sketch.ellipseMode(sketch.CENTER);
         sketch.background(0);
         sketch.frameRate(10);
+        var x, y;
         for (i=0; i<initialAgents; i++) {
-            makeNewAgent(sketch.width/2, sketch.height/2, sketch.random(255), sketch.random(255), sketch.random(255));
+            x = sketch.random(sketch.width/4, 3*sketch.width/4);
+            y = sketch.random(sketch.height/4, 3*sketch.height/4);
+            makeNewAgent(x, y, sketch.random(255), sketch.random(255), sketch.random(255));
         }
     }
     
@@ -121,12 +124,28 @@ var sketch_p5 = new p5(function(sketch) {
     
     
     sketch.getChildColor = function(c1, c2) {
+        var val;
+        var distortion = sketch.random(-50,50);
+        if (Math.abs(distortion) < 10) {
+            val = sketch.random(0,255) // mutation
+        }
         if (clock%2 == 1) {
-            val = c1 + sketch.random(-50,50);
+            val = c1 + distortion;
         } else {
-            val = c2 + sketch.random(-50,50);
+            val = c2 + distortion;
         }
         return sketch.constrain(val, 0, 255);
+    }
+    
+    sketch.populationControl = function () {
+        if ((agents.length > 95) && (clock%20 == 0)) {
+            lifeExpectancy = sketch.max(lifeExpectancy-1, 0);
+            averageChildren = sketch.max(averageChildren-0.2, 0);
+        }
+        if ((agents.length < 20) && (clock%30 == 0)) {
+            lifeExpectancy = sketch.min(lifeExpectancy+1, 500);
+            averageChildren = sketch.min(averageChildren+0.2, 0);
+        }
     }
     
     sketch.draw = function() {
@@ -138,14 +157,12 @@ var sketch_p5 = new p5(function(sketch) {
         spawnPoints.forEach(sketch.operateSpawnPoint)
         sketch.breedAgents();
         sketch.killAgents();
-        if ((agents.length > 200) && (clock%7 == 0)) {
-            lifeExpectancy = sketch.max(lifeExpectancy-1, 0);
-        }
-        if ((agents.length < 10) && (clock%7 == 0)) {
-            lifeExpectancy = sketch.min(lifeExpectancy+1, 500);
-        }
+        sketch.populationControl();
         clock += 1;
-        console.log(lifeExpectancy);
+    }
+    
+    sketch.windowResized = function() {
+      sketch.resizeCanvas(sketch.windowWidth, sketch.windowHeight);
     }
 })
 
