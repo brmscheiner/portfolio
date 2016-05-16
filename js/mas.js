@@ -1,14 +1,16 @@
 var initialAgents = 20;
 var trailSize = 0;
 var headSize = 5;
-var minimumAge = 100;
+var minimumTime = 100;
 var minimumDistance = 20;
 var pregnancyTime = 50;
-var moveDistance = 10;
+var moveDistance = 15;
+var lifeExpectancy = 200;
 var averageChildren = 5;
 
 var agents = [];
 var spawnPoints = [];
+var clock = 0;
 var sketch_p5 = new p5(function(sketch) {
 
     sketch.setup = function() {
@@ -19,7 +21,7 @@ var sketch_p5 = new p5(function(sketch) {
         sketch.rectMode(sketch.CENTER);
         sketch.ellipseMode(sketch.CENTER);
         sketch.background(0);
-        sketch.frameRate(15);
+        sketch.frameRate(10);
         for (i=0; i<initialAgents; i++) {
             makeNewAgent(sketch.width/2, sketch.height/2, sketch.random(255), sketch.random(255), sketch.random(255));
         }
@@ -53,6 +55,7 @@ var sketch_p5 = new p5(function(sketch) {
     
     sketch.incrementAge = function(element) {
         element.age += 1;
+        element.timeSincePregnancy += 1;
     }
     
     sketch.breedAgents = function() {
@@ -75,7 +78,7 @@ var sketch_p5 = new p5(function(sketch) {
             sketch.fill(element.r, element.g, element.b);
             sketch.ellipse(element.x, element.y, element.size, element.size);
             if (element.freezeCountdown == 0) {
-                element.age = 0;
+                element.timeSincePregnancy = 0;
                 element.size = headSize;
                 element.freezeCountdown = pregnancyTime;
                 element.breeding = false;
@@ -85,14 +88,17 @@ var sketch_p5 = new p5(function(sketch) {
         }
     }
     
-    sketch.killOffscreenAgents = function() {
-        var onScreenAgents = [];
+    sketch.killAgents = function() {
+        var keepers = [];
         for (i=0; i<agents.length; i++) {
             if ((agents[i].x > 0) && (agents[i].x < sketch.width) && (agents[i].y > 0) && (agents[i].y < sketch.height)) {
-                onScreenAgents.push(agents[i]);
+                var distortion = lifeExpectancy/10;
+                if (agents[i].age < lifeExpectancy+sketch.random(-distortion, distortion)) {
+                    keepers.push(agents[i]);
+                }
             }
         }
-        agents = onScreenAgents;
+        agents = keepers;
     }
     
     sketch.operateSpawnPoint = function(element) {
@@ -101,9 +107,9 @@ var sketch_p5 = new p5(function(sketch) {
         } else {
             var nChildren = sketch.random(averageChildren/2, 3*averageChildren/2);
             for (i=0; i<nChildren; i++) {
-                var r = (element.r1 + element.r2)/2 + sketch.random(-30,30);
-                var g = (element.r1 + element.r2)/2 + sketch.random(-30,30);
-                var b = (element.r1 + element.r2)/2 + sketch.random(-30,30);
+                var r = sketch.getChildColor(element.r1, element.r2);
+                var g = sketch.getChildColor(element.g1, element.g2);
+                var b = sketch.getChildColor(element.b1, element.b2);
                 makeNewAgent(element.x, element.y, r, g, b);
             }
             deleteIndex = spawnPoints.indexOf(element);
@@ -111,6 +117,16 @@ var sketch_p5 = new p5(function(sketch) {
                 spawnPoints.splice(deleteIndex, 1);
             }
         }
+    }
+    
+    
+    sketch.getChildColor = function(c1, c2) {
+        if (clock%2 == 1) {
+            val = c1 + sketch.random(-50,50);
+        } else {
+            val = c2 + sketch.random(-50,50);
+        }
+        return sketch.constrain(val, 0, 255);
     }
     
     sketch.draw = function() {
@@ -121,14 +137,22 @@ var sketch_p5 = new p5(function(sketch) {
         agents.forEach(sketch.incrementAge);
         spawnPoints.forEach(sketch.operateSpawnPoint)
         sketch.breedAgents();
-        sketch.killOffscreenAgents();
+        sketch.killAgents();
+        if ((agents.length > 200) && (clock%7 == 0)) {
+            lifeExpectancy = sketch.max(lifeExpectancy-1, 0);
+        }
+        if ((agents.length < 10) && (clock%7 == 0)) {
+            lifeExpectancy = sketch.min(lifeExpectancy+1, 500);
+        }
+        clock += 1;
+        console.log(lifeExpectancy);
     }
 })
 
 breedingPossible = function(agent1, agent2) {
     if (agent1.id == agent2.id) {
         return false;
-    } else if (agent1.age < minimumAge || agent2.age < minimumAge) {
+    } else if (agent1.timeSincePregnancy < minimumTime || agent2.timeSincePregnancy < minimumTime) {
         return false;
     } else if (agent1.breeding || agent2.breeding) {
         return false;
@@ -163,6 +187,7 @@ makeNewAgent = function(xpos, ypos, rcol, gcol, bcol) {
             breeding: false,
             freezeCountdown: pregnancyTime,
             age: 0,
+            timeSincePregnancy: 0,
             size: headSize,
             r: rcol,
             g: gcol,
@@ -172,3 +197,4 @@ makeNewAgent = function(xpos, ypos, rcol, gcol, bcol) {
             history: []
     })
 }
+
