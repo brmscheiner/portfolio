@@ -1,9 +1,11 @@
 var initialAgents = 20;
-var trailSize = 50;
-var minimumAge = 60;
+var trailSize = 0;
+var headSize = 5;
+var minimumAge = 100;
 var minimumDistance = 20;
-var pregnancyTime = 20;
+var pregnancyTime = 50;
 var moveDistance = 10;
+var averageChildren = 5;
 
 var agents = [];
 var spawnPoints = [];
@@ -26,6 +28,7 @@ var sketch_p5 = new p5(function(sketch) {
     sketch.renderAgent = function(element) {
         if (element.history.length) {
             var intensity = (1/trailSize)*255;
+            sketch.stroke(intensity);
             sketch.line(element.x, element.y, element.history[0].x, element.history[0].y);
             for (i=0; i<element.history.length-1; i++) {
                 intensity += 255/trailSize;
@@ -58,6 +61,7 @@ var sketch_p5 = new p5(function(sketch) {
                 if (breedingPossible(agents[i],agents[j])) {
                     agents[i].breeding = true;
                     agents[j].breeding = true;
+                    makeNewSpawnPoint(agents[i], agents[j]);
                 }
             }
         }
@@ -65,13 +69,15 @@ var sketch_p5 = new p5(function(sketch) {
     
     sketch.operateAgent = function(element) {
         if (element.breeding == true) {
-            element.babyCountdown -= 1;
-            sketch.stroke("rgb(255,0,0)");
+            element.freezeCountdown -= 1;
+            element.size += 0.5;
+            sketch.stroke(element.r, element.g, element.b);
+            sketch.fill(element.r, element.g, element.b);
             sketch.ellipse(element.x, element.y, element.size, element.size);
-            if (element.babyCountdown == 0) {
-                console.log("Let's make some babies");
+            if (element.freezeCountdown == 0) {
                 element.age = 0;
-                element.babyCountdown = pregnancyTime;
+                element.size = headSize;
+                element.freezeCountdown = pregnancyTime;
                 element.breeding = false;
             }
         } else {
@@ -89,12 +95,31 @@ var sketch_p5 = new p5(function(sketch) {
         agents = onScreenAgents;
     }
     
+    sketch.operateSpawnPoint = function(element) {
+        if (element.timer>0) {
+            element.timer -= 1;
+        } else {
+            var nChildren = sketch.random(averageChildren/2, 3*averageChildren/2);
+            for (i=0; i<nChildren; i++) {
+                var r = (element.r1 + element.r2)/2 + sketch.random(-30,30);
+                var g = (element.r1 + element.r2)/2 + sketch.random(-30,30);
+                var b = (element.r1 + element.r2)/2 + sketch.random(-30,30);
+                makeNewAgent(element.x, element.y, r, g, b);
+            }
+            deleteIndex = spawnPoints.indexOf(element);
+            if (deleteIndex > -1) {
+                spawnPoints.splice(deleteIndex, 1);
+            }
+        }
+    }
+    
     sketch.draw = function() {
         sketch.background(0);
         sketch.strokeWeight(3);
         agents.forEach(sketch.renderAgent);
         agents.forEach(sketch.operateAgent);
         agents.forEach(sketch.incrementAge);
+        spawnPoints.forEach(sketch.operateSpawnPoint)
         sketch.breedAgents();
         sketch.killOffscreenAgents();
     }
@@ -136,9 +161,9 @@ makeNewAgent = function(xpos, ypos, rcol, gcol, bcol) {
     agents.push({
             id: agents.length,
             breeding: false,
-            babyCountdown: pregnancyTime,
+            freezeCountdown: pregnancyTime,
             age: 0,
-            size: 5,
+            size: headSize,
             r: rcol,
             g: gcol,
             b: bcol,
