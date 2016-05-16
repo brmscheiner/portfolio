@@ -5,11 +5,13 @@ var minimumTime = 100;
 var minimumDistance = 20;
 var pregnancyTime = 50;
 var moveDistance = 15;
-var lifeExpectancy = 225;
-var averageChildren = 7;
+var startingLifeExpectancy = 225;
+var startingAverageChildren = 6;
 
 var agents = [];
 var spawnPoints = [];
+var averageChildren = startingAverageChildren;
+var lifeExpectancy = startingLifeExpectancy;
 var clock = 0;
 var sketch_p5 = new p5(function(sketch) {
 
@@ -47,13 +49,25 @@ var sketch_p5 = new p5(function(sketch) {
     }
 
     sketch.moveAgent = function(element) {
-        // Log the last trailSize positions of the agent.
+        // log the last trailSize positions of the agent.
         element.history.unshift({x: element.x, y: element.y});
         if (element.history.length > trailSize) {
             element.history.pop();
         }
-        element.x += sketch.random(-moveDistance, moveDistance);
-        element.y += sketch.random(-moveDistance, moveDistance);
+        if ((clock%5 == 0) || (!element.x_direction)) {
+            if (element.x > sketch.mouseX) {
+                element.x_direction = sketch.random(-1, 0.85);
+            } else {
+                element.x_direction = sketch.random(-0.85, 1);
+            }
+            if (element.y > sketch.mouseY) {
+                element.y_direction = sketch.random(-1, 0.85);
+            } else {
+                element.y_direction = sketch.random(-0.85, 1);
+            }
+                    }
+        element.x += moveDistance*element.x_direction;
+        element.y += moveDistance*element.y_direction;
     }
     
     sketch.incrementAge = function(element) {
@@ -122,7 +136,6 @@ var sketch_p5 = new p5(function(sketch) {
         }
     }
     
-    
     sketch.getChildColor = function(c1, c2) {
         var val;
         var distortion = sketch.random(-50,50);
@@ -138,13 +151,20 @@ var sketch_p5 = new p5(function(sketch) {
     }
     
     sketch.populationControl = function () {
-        if ((agents.length > 95) && (clock%20 == 0)) {
-            lifeExpectancy = sketch.max(lifeExpectancy-1, 0);
-            averageChildren = sketch.max(averageChildren-0.2, 0);
+        if ((agents.length > 85) && (clock%20 == 0)) {
+            var excessAgents = agents.length - 95;
+            lifeExpectancy = sketch.max(lifeExpectancy - excessAgents/40, 0);
+            averageChildren = sketch.max(averageChildren - excessAgents/100, 0);
+        } else if ((agents.length < 20) && (clock%20 == 0)) {
+            var missingAgents = 60 - agents.length;
+            lifeExpectancy = sketch.min(lifeExpectancy + missingAgents/30, 500);
+            averageChildren = sketch.min(averageChildren + missingAgents/100, 0);
+        } else {
+            lifeExpectancy = startingLifeExpectancy;
+            averageChildren = startingAverageChildren;
         }
-        if ((agents.length < 20) && (clock%30 == 0)) {
-            lifeExpectancy = sketch.min(lifeExpectancy+1, 500);
-            averageChildren = sketch.min(averageChildren+0.2, 0);
+        if (agents.length > 150) {
+            agents.pop(); // executions
         }
     }
     
@@ -159,6 +179,7 @@ var sketch_p5 = new p5(function(sketch) {
         sketch.killAgents();
         sketch.populationControl();
         clock += 1;
+        console.log(averageChildren)
     }
     
     sketch.windowResized = function() {
