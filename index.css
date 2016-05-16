@@ -1,6 +1,5 @@
 body {
   overflow-x: hidden;
-  padding-top: 40px;
   font-family: 'Playfair Display';
 }
 
@@ -52,7 +51,7 @@ h1 {
   bottom:0;
   margin: auto;
   z-index: 9999;
-  height: 128px;
+  height: 94px;
   background-color: rgba(223,228,229,0.9);
   width: 43%;
   border-radius: 10px;
@@ -67,7 +66,7 @@ h1 {
   margin: auto;
   z-index: 1;
   height: 100%;
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(255,255,255,0.5);
   width: 100%;
 }
 
