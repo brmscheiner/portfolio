@@ -1,7 +1,8 @@
 var initialAgents = 30;
 var trailSize = 10;
-var headSize = 5;
+var headSize = 10;
 var minimumTime = 100;
+var tailMode = "curvy";
 var minimumDistance = 20;
 var pregnancyTime = 50;
 var moveDistance = 15;
@@ -33,19 +34,46 @@ var sketch_p5 = new p5(function(sketch) {
     }
     
     sketch.renderAgent = function(element) {
-        if (element.history.length) {
-            var intensity = (1/trailSize)*255;
-            sketch.stroke(intensity);
-            sketch.line(element.x, element.y, element.history[0].x, element.history[0].y);
-            for (i=0; i<element.history.length-1; i++) {
-                intensity += 255/trailSize;
-                sketch.stroke(intensity);
-                sketch.line(element.history[i].x, element.history[i].y, element.history[i+1].x, element.history[i+1].y);
-            }
+        if (tailMode == "straight") {
+            sketch.renderStraightTail(element);
+        } else {
+            sketch.renderCurvyTail(element);
         }
         sketch.stroke(element.r, element.g, element.b);
         sketch.fill(element.r, element.g, element.b);
         sketch.ellipse(element.x, element.y, element.size, element.size);
+    }
+    
+    sketch.renderCurvyTail = function(element) {
+        var tailLength = element.history.length;
+        if (tailLength < 4) {
+            sketch.renderStraightTail(element);
+        } else {
+            sketch.stroke(element.r, element.g, element.b);
+            console.log(sketch.floor(3*tailLength/4));
+            var control1_x = element.history[sketch.floor(tailLength/4)].x;
+            var control1_y = element.history[sketch.floor(tailLength/4)].y;
+            var control2_x = element.history[sketch.floor(3*tailLength/4)].x;
+            var control2_y = element.history[sketch.floor(3*tailLength/4)].y;
+            var end_x = element.history[tailLength-1].x;
+            var end_y = element.history[tailLength-1].y;
+            //sketch.curve(element.x, element.y, control1_x, control1_y, control2_x, control2_y, end_x, end_y);
+            //sketch.curve(control1_x, control1_y, element.x, element.y, control2_x, control2_y, end_x, end_y);
+            sketch.curve(element.x, element.y, element.x, element.y, control2_x, control2_y, end_x, end_y);
+        }
+    }
+    
+    sketch.renderStraightTail = function(element) {
+        if (element.history.length) {
+            var intensity = 255 - (1/trailSize)*255;
+            sketch.stroke(intensity);
+            sketch.line(element.x, element.y, element.history[0].x, element.history[0].y);
+            for (i=0; i<element.history.length-1; i++) {
+                intensity -= 255/trailSize;
+                sketch.stroke(intensity);
+                sketch.line(element.history[i].x, element.history[i].y, element.history[i+1].x, element.history[i+1].y);
+            }  
+        }
     }
 
     sketch.moveAgent = function(element) {
@@ -179,7 +207,6 @@ var sketch_p5 = new p5(function(sketch) {
         sketch.killAgents();
         sketch.populationControl();
         clock += 1;
-        console.log(averageChildren)
     }
     
     sketch.windowResized = function() {
