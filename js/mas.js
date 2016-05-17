@@ -23,6 +23,8 @@ var sketch_p5 = new p5(function(sketch) {
         sketch.colorMode(sketch.RGB);
         sketch.rectMode(sketch.CENTER);
         sketch.ellipseMode(sketch.CENTER);
+        sketch.textAlign(sketch.CENTER);
+        sketch.textSize(70);
         sketch.background(0);
         sketch.frameRate(10);
         var x, y;
@@ -57,9 +59,9 @@ var sketch_p5 = new p5(function(sketch) {
             var control2_y = element.history[sketch.floor(3*tailLength/4)].y;
             var end_x = element.history[tailLength-1].x;
             var end_y = element.history[tailLength-1].y;
-            //sketch.curve(element.x, element.y, control1_x, control1_y, control2_x, control2_y, end_x, end_y);
-            //sketch.curve(control1_x, control1_y, element.x, element.y, control2_x, control2_y, end_x, end_y);
-            sketch.curve(element.x, element.y, element.x, element.y, control2_x, control2_y, end_x, end_y);
+            sketch.noFill()
+            sketch.bezier(element.x, element.y, control1_x, control1_y, control2_x, control2_y, end_x, end_y);
+            // sketch.bezier(element.x, element.y, element.x, element.y, control2_x, control2_y, end_x, end_y); // looks cool too
         }
     }
     
@@ -206,6 +208,12 @@ var sketch_p5 = new p5(function(sketch) {
         sketch.breedAgents();
         sketch.killAgents();
         sketch.populationControl();
+        
+        sketch.fill(153, 0, 0, 2000/clock);
+        sketch.stroke(255, 255, 153, 2000/clock);
+        sketch.strokeWeight(3);
+        sketch.text("SCHEINER BOCK", sketch.width/2, sketch.height/2);
+            
         clock += 1;
     }
     
