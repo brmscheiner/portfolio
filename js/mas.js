@@ -14,10 +14,13 @@ var spawnPoints = [];
 var averageChildren = startingAverageChildren;
 var lifeExpectancy = startingLifeExpectancy;
 var clock = 0;
+var oldWindowWidth, oldWindowHeight;
 var sketch_p5 = new p5(function(sketch) {
 
     sketch.setup = function() {
         var myCanvas = sketch.createCanvas(sketch.windowWidth, sketch.windowHeight);
+        oldWindowWidth = sketch.windowWidth;
+        oldWindowHeight = sketch.windowHeight;
         var canvasContainer = document.getElementById("canvasContainer");
         myCanvas.parent(canvasContainer);
         sketch.colorMode(sketch.RGB);
@@ -209,16 +212,43 @@ var sketch_p5 = new p5(function(sketch) {
         sketch.killAgents();
         sketch.populationControl();
         
-        sketch.fill(153, 0, 0, 2000/clock);
-        sketch.stroke(255, 255, 153, 2000/clock);
-        sketch.strokeWeight(3);
-        sketch.text("SCHEINER BOCK", sketch.width/2, sketch.height/2);
+        if (clock < 100) {
+            var transparency = 2000/clock;
+            sketch.fill(153, 0, 0, transparency);
+            sketch.stroke(255, 255, 153, transparency);
+            sketch.strokeWeight(3);
+            sketch.text("SCHEINER BOCK", sketch.width/2, sketch.height/2);
+        } else if (clock < 105) {
+            var transparency = 2000/clock - (2000/clock)*(clock - 100)/5;
+            sketch.fill(153, 0, 0, transparency);
+            sketch.stroke(255, 255, 153, transparency);
+            sketch.strokeWeight(3);
+            sketch.text("SCHEINER BOCK", sketch.width/2, sketch.height/2);
+        }
+        
             
         clock += 1;
+        console.log(clock)
     }
     
     sketch.windowResized = function() {
       sketch.resizeCanvas(sketch.windowWidth, sketch.windowHeight);
+      var x_scale = sketch.windowWidth/oldWindowWidth;
+      var y_scale = sketch.windowHeight/oldWindowHeight;
+      oldWindowWidth = sketch.windowWidth;
+      oldWindowHeight = sketch.windowHeight
+      for (i=0; i<agents.length; i++) {
+          agents[i].x *= x_scale;
+          agents[i].y *= y_scale;
+          for (j=0; j<agents[i].history.length; j++) {
+              agents[i].history[j].x *= x_scale;
+              agents[i].history[j].y *= y_scale;
+          }
+      }
+      for (i=0; i<spawnPoints; i++) {
+          spawnPoints[i].x *= x_scale;
+          spawnPoints[i].y *= y_scale;
+      }
     }
 })
 
