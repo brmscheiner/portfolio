@@ -8,6 +8,7 @@ var pregnancyTime = 50;
 var moveDistance = 15;
 var startingLifeExpectancy = 225;
 var startingAverageChildren = 6;
+var headsOn = true;
 
 var agents = [];
 var spawnPoints = [];
@@ -44,9 +45,11 @@ var sketch_p5 = new p5(function(sketch) {
         } else {
             sketch.renderCurvyTail(element);
         }
-        sketch.stroke(element.r, element.g, element.b);
-        sketch.fill(element.r, element.g, element.b);
-        sketch.ellipse(element.x, element.y, element.size, element.size);
+        if (headsOn) {
+            sketch.stroke(element.r, element.g, element.b);
+            sketch.fill(element.r, element.g, element.b);
+            sketch.ellipse(element.x, element.y, element.size, element.size);
+        }
     }
     
     sketch.renderCurvyTail = function(element) {
@@ -55,7 +58,6 @@ var sketch_p5 = new p5(function(sketch) {
             sketch.renderStraightTail(element);
         } else {
             sketch.stroke(element.r, element.g, element.b);
-            console.log(sketch.floor(3*tailLength/4));
             var control1_x = element.history[sketch.floor(tailLength/4)].x;
             var control1_y = element.history[sketch.floor(tailLength/4)].y;
             var control2_x = element.history[sketch.floor(3*tailLength/4)].x;
@@ -64,7 +66,7 @@ var sketch_p5 = new p5(function(sketch) {
             var end_y = element.history[tailLength-1].y;
             sketch.noFill()
             sketch.bezier(element.x, element.y, control1_x, control1_y, control2_x, control2_y, end_x, end_y);
-            // sketch.bezier(element.x, element.y, element.x, element.y, control2_x, control2_y, end_x, end_y); // looks cool too
+            //sketch.bezier(element.x, element.y, element.x, element.y, control2_x, control2_y, end_x, end_y); // looks cool too
         }
     }
     
@@ -88,17 +90,27 @@ var sketch_p5 = new p5(function(sketch) {
             element.history.pop();
         }
         if ((clock%5 == 0) || (!element.x_direction)) {
-            if (element.x > sketch.mouseX) {
-                element.x_direction = sketch.random(-1, 0.85);
+            var mousePull;
+            if ((sketch.mouseX > 0) && (sketch.mouseX < sketch.width) && (sketch.mouseY > 0) && (sketch.mouseY < sketch.height)) {
+                if (element.id % 2 == 0) {
+                    mousePull = 0.15;
+                } else {
+                    mousePull = 0;
+                }
             } else {
-                element.x_direction = sketch.random(-0.85, 1);
+                mousePull = 0;
+            }
+            if (element.x > sketch.mouseX) {
+                element.x_direction = sketch.random(-1, 1-mousePull);
+            } else {
+                element.x_direction = sketch.random(1+mousePull, 1);
             }
             if (element.y > sketch.mouseY) {
-                element.y_direction = sketch.random(-1, 0.85);
+                element.y_direction = sketch.random(-1, 1-mousePull);
             } else {
-                element.y_direction = sketch.random(-0.85, 1);
+                element.y_direction = sketch.random(1+mousePull, 1);
             }
-                    }
+        }
         element.x += moveDistance*element.x_direction;
         element.y += moveDistance*element.y_direction;
     }
@@ -123,7 +135,7 @@ var sketch_p5 = new p5(function(sketch) {
     sketch.operateAgent = function(element) {
         if (element.breeding == true) {
             element.freezeCountdown -= 1;
-            element.size += 0.5;
+            element.size += 0.2;
             sketch.stroke(element.r, element.g, element.b);
             sketch.fill(element.r, element.g, element.b);
             sketch.ellipse(element.x, element.y, element.size, element.size);
@@ -139,9 +151,10 @@ var sketch_p5 = new p5(function(sketch) {
     }
     
     sketch.killAgents = function() {
+        var buffer = 30;
         var keepers = [];
         for (i=0; i<agents.length; i++) {
-            if ((agents[i].x > 0) && (agents[i].x < sketch.width) && (agents[i].y > 0) && (agents[i].y < sketch.height)) {
+            if ((agents[i].x > -buffer) && (agents[i].x < sketch.width+buffer) && (agents[i].y > -buffer) && (agents[i].y < sketch.height+buffer)) {
                 var distortion = lifeExpectancy/10;
                 if (agents[i].age < lifeExpectancy+sketch.random(-distortion, distortion)) {
                     keepers.push(agents[i]);
@@ -151,11 +164,27 @@ var sketch_p5 = new p5(function(sketch) {
         agents = keepers;
     }
     
+    sketch.howManyChildren = function() {
+        if (agents.length > 200) {
+            return 0;
+        } else if (agents.length > 150) {
+            return 1;
+        } else if (agents.length > 100) {
+            return sketch.random(averageChildren/2, averageChildren);
+        } else if (agents.length > 40) {
+            return sketch.random(averageChildren/2, 3*averageChildren/2);
+        } else if (agents.length > 15) {
+            return sketch.random(averageChildren, 3*averageChildren/2);
+        } else {
+            return 20;
+        }
+    }
+    
     sketch.operateSpawnPoint = function(element) {
         if (element.timer>0) {
             element.timer -= 1;
         } else {
-            var nChildren = sketch.random(averageChildren/2, 3*averageChildren/2);
+            var nChildren = sketch.howManyChildren();
             for (i=0; i<nChildren; i++) {
                 var r = sketch.getChildColor(element.r1, element.r2);
                 var g = sketch.getChildColor(element.g1, element.g2);
@@ -172,7 +201,7 @@ var sketch_p5 = new p5(function(sketch) {
     sketch.getChildColor = function(c1, c2) {
         var val;
         var distortion = sketch.random(-50,50);
-        if (Math.abs(distortion) < 10) {
+        if (Math.abs(distortion) < 15) {
             val = sketch.random(0,255) // mutation
         }
         if (clock%2 == 1) {
@@ -181,24 +210,6 @@ var sketch_p5 = new p5(function(sketch) {
             val = c2 + distortion;
         }
         return sketch.constrain(val, 0, 255);
-    }
-    
-    sketch.populationControl = function () {
-        if ((agents.length > 85) && (clock%20 == 0)) {
-            var excessAgents = agents.length - 95;
-            lifeExpectancy = sketch.max(lifeExpectancy - excessAgents/40, 0);
-            averageChildren = sketch.max(averageChildren - excessAgents/100, 0);
-        } else if ((agents.length < 20) && (clock%20 == 0)) {
-            var missingAgents = 60 - agents.length;
-            lifeExpectancy = sketch.min(lifeExpectancy + missingAgents/30, 500);
-            averageChildren = sketch.min(averageChildren + missingAgents/100, 0);
-        } else {
-            lifeExpectancy = startingLifeExpectancy;
-            averageChildren = startingAverageChildren;
-        }
-        if (agents.length > 150) {
-            agents.pop(); // executions
-        }
     }
     
     sketch.draw = function() {
@@ -210,7 +221,6 @@ var sketch_p5 = new p5(function(sketch) {
         spawnPoints.forEach(sketch.operateSpawnPoint)
         sketch.breedAgents();
         sketch.killAgents();
-        sketch.populationControl();
         
         if (clock < 100) {
             var transparency = 2000/clock;
@@ -225,30 +235,36 @@ var sketch_p5 = new p5(function(sketch) {
             sketch.strokeWeight(3);
             sketch.text("SCHEINER BOCK", sketch.width/2, sketch.height/2);
         }
-        
             
         clock += 1;
-        console.log(clock)
     }
     
     sketch.windowResized = function() {
       sketch.resizeCanvas(sketch.windowWidth, sketch.windowHeight);
-      var x_scale = sketch.windowWidth/oldWindowWidth;
-      var y_scale = sketch.windowHeight/oldWindowHeight;
+      var xScale = sketch.windowWidth/oldWindowWidth;
+      var yScale = sketch.windowHeight/oldWindowHeight;
       oldWindowWidth = sketch.windowWidth;
       oldWindowHeight = sketch.windowHeight
       for (i=0; i<agents.length; i++) {
-          agents[i].x *= x_scale;
-          agents[i].y *= y_scale;
+          agents[i].x *= xScale;
+          agents[i].y *= yScale;
           for (j=0; j<agents[i].history.length; j++) {
-              agents[i].history[j].x *= x_scale;
-              agents[i].history[j].y *= y_scale;
+              agents[i].history[j].x *= xScale;
+              agents[i].history[j].y *= yScale;
           }
       }
       for (i=0; i<spawnPoints; i++) {
-          spawnPoints[i].x *= x_scale;
-          spawnPoints[i].y *= y_scale;
+          spawnPoints[i].x *= xScale;
+          spawnPoints[i].y *= yScale;
       }
+    }
+    
+    sketch.mouseClicked = function() {
+        if (headsOn) {
+            headsOn = false;
+        } else {
+            headsOn = true;
+        }
     }
 })
 
